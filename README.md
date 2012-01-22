@@ -1,6 +1,5 @@
 ﻿<html>
 <head>
-    <title>LinqMapper</title>
 </head>
 <body class="c2">
     <h2 class="c0 c6">
