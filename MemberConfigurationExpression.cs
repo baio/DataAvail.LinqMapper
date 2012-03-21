@@ -35,7 +35,7 @@ namespace DataAvail.LinqMapper
         }
 
         protected LambdaExpression ResolveExpression { get; set; }
-
+        
         internal Expression Bind(Expression ParameterExpression)
         {
             if (ResolveExpression == null)
@@ -44,23 +44,7 @@ namespace DataAvail.LinqMapper
             }
             else
             {
-                /*
-                var propExpr = Expression.MakeMemberAccess(ParameterExpression,  ((MemberExpression)ParameterExpression).Member);
-
-                var paramExpr = (ParameterExpression)(ParameterExpression is ParameterExpression ? ParameterExpression :
-                    Expression.Property(ParameterExpression, (PropertyInfo)((MemberExpression)ParameterExpression).Member));
-                    //TypeMap.Bind((PropertyInfo) ((MemberExpression)ParameterExpression).Member, DestPropertyInfo, ParameterExpression));
-
-                return ResolveExpression.Convert(paramExpr).Body;
-                 */
-
-                var body = ResolveExpression.ConvertParam(ParameterExpression).Body;
-
-
-                //var expr = TypeMap.Bind((PropertyInfo)((MemberExpression)ResolveExpression.Body).Member, DestPropertyInfo, ParameterExpression);
-                //var expr = TypeMap.Bind((PropertyInfo)((MemberExpression)ParameterExpression).Member, DestPropertyInfo, ParameterExpression);
-
-                return body;
+                return ResolveExpression.ConvertParam(ParameterExpression).Body;
             }
         }
 

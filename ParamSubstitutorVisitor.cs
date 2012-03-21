@@ -21,7 +21,15 @@ namespace DataAvail.LinqMapper
 
         protected override Expression VisitParameter(ParameterExpression node)
         {
-            return newExpression; // replace all old param references with new ones
+            // replace all old param references with new ones
+
+            if (node == oldParameter) // if instance is not old parameter - do nothing
+                return newExpression; //base.VisitMember(node);
+            else
+                return node;
+
+
+            //return newExpression; // replace all old param references with new ones
         }
 
         protected override Expression VisitMember(MemberExpression node)
@@ -32,6 +40,22 @@ namespace DataAvail.LinqMapper
             var newObj = Visit(node.Expression);
             var newMember = newExpression.Type.GetMember(node.Member.Name).First();
             return Expression.MakeMemberAccess(newObj, newMember);
+
+
+        }
+
+        protected override Expression VisitMethodCall(MethodCallExpression node)
+        {
+            if (node != null && node.Method.DeclaringType == typeof(DataAvail.LinqMapper.Mapper) && node.Method.Name == "MapExpression")
+            {
+                return (LambdaExpression) node.Method.Invoke(null, new object[] { new string[0] });
+            }
+            else
+            {
+                var methodCall = base.VisitMethodCall(node);
+
+                return methodCall;
+            }
         }
     }
 

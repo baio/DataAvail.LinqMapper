@@ -52,6 +52,12 @@
   <ItemGroup>
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAvail.Utils\DataAvail.Utils.csproj">
+      <Project>{B8DB1E34-DB25-4A50-8F0F-A450B8D55F54}</Project>
+      <Name>DataAvail.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -40,5 +40,22 @@ namespace DataAvail.LinqMapper
 
             return Src.Select(expr);
         }
+
+        public static Expression<Func<TSrc, TDest>> MapExpression<TSrc, TDest>(params string[] Expands)
+        {
+            var mapping = (MappingExpression<TSrc, TDest>)Find<TSrc, TDest>();
+
+            if (mapping == null)
+                throw new Exception(string.Format("Mapping between {0} and {1} not found", typeof(TSrc).Name, typeof(TDest).Name));
+
+            var expr = (Expression<Func<TSrc, TDest>>)mapping.BuildExpression(Expands);
+
+            return expr;
+        }
+
+
+
+
+
     }
 }

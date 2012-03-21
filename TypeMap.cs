@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using System.Reflection;
+using DataAvail.Utils;
 
 namespace DataAvail.LinqMapper
 {
@@ -72,7 +73,7 @@ namespace DataAvail.LinqMapper
             var mapType = GetMapType(SrcPropertyInfo, DestPropertyInfo);
 
             return mapType != PropertyMapType.Unmapped &&
-                (mapType != PropertyMapType.Complex && mapType != PropertyMapType.List || Expands.Contains(DestPropertyInfo.Name));
+                (mapType != PropertyMapType.Complex && mapType != PropertyMapType.List || Expands.Select(p=>p.Split('/')[0]).Contains(DestPropertyInfo.Name));
         }
 
         private static PropertyMapType GetMapType(PropertyInfo SrcPropertyInfo, PropertyInfo DestPropertyInfo)
@@ -83,8 +84,8 @@ namespace DataAvail.LinqMapper
                 var srcType = SrcPropertyInfo.PropertyType;
                 var destType = DestPropertyInfo.PropertyType;
 
-                if (srcType == destType
-                    && (srcType == typeof(string) || srcType.IsPrimitive))
+                if (srcType == destType && Reflection.IsPrimitive(srcType))
+                    //&& (srcType == typeof(string) || srcType.IsPrimitive || DataAvail. srcType.IsNu))
                 {
                     return PropertyMapType.Simple;
                 }
