@@ -1,3 +1,10 @@
+Some time ago I moved it in this project, https://github.com/baio/DataAvail.Framework. 
+Latest version is now there, the project now is a part of DataAvail.Framework solution.
+This solution integrate utilities to work with data Services such as CORS, JSON support, web service autorization
+via standard ASP auth mechanism and other utilities. You can separate LinqMapper project from there if you want. 
+In case of any questions feel free to contact!
+
+
 ﻿Problem
 -------
 
